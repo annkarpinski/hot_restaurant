@@ -47,7 +47,17 @@ app.get("/tables", function (req, res) {
 app.get("/api/tables", function (req, res) {
   res.json(tables);
 });
+
+app.post("/api/tables", function (req, res) {
+  console.log(req.body);
+  res.send("it's working");
+});
+
 app.get("/api/waitlist", function (req, res) {
+  res.json(waitlist);
+});
+
+app.post("/api/waitlist", function (req, res) {
   res.json(waitlist);
 });
 
