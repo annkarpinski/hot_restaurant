@@ -1,5 +1,6 @@
 // import dependencies
 var express = require("express");
+var path = require("path");
 
 // create am express server
 var app = express();
@@ -22,8 +23,8 @@ var tables = [
 ];
 var waitlist = [
   {
-    customerName: "Table test",
-    customerEmail: "table@test.com",
+    customerName: "Waitlist test",
+    customerEmail: "waitlist@test.com",
     customerID: "0123456789",
     phoneNumber: "555-555-5555",
   },
@@ -31,10 +32,24 @@ var waitlist = [
 
 // html routes
 app.get("/", function (req, res) {
-  res.send("It's working!");
+  res.sendFile(path.join(__dirname, "./public/home.html"));
 });
 
-// api routes
+app.get("/reserve", function (req, res) {
+  res.sendFile(path.join(__dirname, "./public/reserve.html"));
+});
+
+app.get("/tables", function (req, res) {
+  res.sendFile(path.join(__dirname, "./public/tables.html"));
+});
+
+// api routes...send and receive data
+app.get("/api/tables", function (req, res) {
+  res.json(tables);
+});
+app.get("/api/waitlist", function (req, res) {
+  res.json(waitlist);
+});
 
 // start the server
 app.listen(PORT, function () {
