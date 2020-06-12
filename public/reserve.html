@@ -13,8 +13,6 @@
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
     />
-    <script src="https://code.jquery.com/jquery.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
   </head>
 
   <body>
@@ -86,5 +84,42 @@
         </div>
       </footer>
     </div>
+
+    <!-- JS -->
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+      //handle submit click
+      //fat arrow function
+      $(".submit").on("click", (event) => {
+        // prevent default
+        event.preventDefault();
+
+        //compile user input into new objecgt
+        const newReservation = {
+          customerName: $("#reserve-name").val().trim(),
+          customerEmail: $("#reserve-email").val().trim(),
+          customerID: $("#reserve-unique-id").val().trim(),
+          phoneNumber: $("#reserve-phone").val().trim(),
+        };
+        //console.log(newReservation);
+
+        //submit reservation
+        //A promise is created to return a value or error eventually
+        //single argument being passed in to callback function, so don't need parenthesis around reservation data response with fat arrow function
+        $.post("/api/tables", newReservation, (reservation) => {
+          //confirm reservation is available
+          //ES6 ternary operator instead of if/else statement
+          reservation === true
+            ? alert("Your reservation is confirmed!")
+            : alert("You are on the waitlist.");
+        });
+        //reset form
+        $("#reserve-name").val("");
+        $("#reserve-email").val("");
+        $("#reserve-unique-id").val("");
+        $("#reserve-phone").val("");
+      });
+    </script>
   </body>
 </html>
