@@ -75,5 +75,64 @@
         </div>
       </footer>
     </div>
+
+    <!-- JS -->
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+      // "download" table data from server
+      const runTableQuery = () => {
+        //get table reservations
+        $.get("/api/tables", (reservations) => {
+          //display data for each reservation
+          reservations.forEach((reservation, index) => {
+            //select table list element
+            const tables = $("#tables");
+
+            //generate table HTML
+            const listItem = $("<li class='list-group-item mt-4'>").append(
+              $("<h2>").text("Table #" + (index + 1)),
+              $("<hr>"),
+              $("<h2>").text("ID: " + reservation.customerID),
+              $("<h2>").text("Name: " + reservation.customerName),
+              $("<h2>").text("Email: " + reservation.customerEmail),
+              $("<h2>").text("Phone: " + reservation.phoneNumber)
+            );
+
+            // append table to table list
+            tables.append(listItem);
+            console.log(tables);
+          });
+        });
+      };
+
+      // "download" waitlist data from server
+      const runWaitlistQuery = () => {
+        //get table reservations
+        $.get("/api/waitlist", (reservations) => {
+          //display data for each reservation
+          reservations.forEach((reservation, index) => {
+            //select table list element
+            const waitlist = $("#waitlist");
+
+            //generate table HTML
+            const listItem = $("<li class='list-group-item mt-4'>").append(
+              $("<h2>").text("Table #" + (index + 1)),
+              $("<hr>"),
+              $("<h2>").text("ID: " + reservation.customerID),
+              $("<h2>").text("Name: " + reservation.customerName),
+              $("<h2>").text("Email: " + reservation.customerEmail),
+              $("<h2>").text("Phone: " + reservation.phoneNumber)
+            );
+
+            // append table to table list
+            waitlist.append(listItem);
+          });
+        });
+      };
+      //fetch data
+      runTableQuery();
+      runWaitlistQuery();
+    </script>
   </body>
 </html>

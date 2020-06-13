@@ -95,7 +95,7 @@
         // prevent default
         event.preventDefault();
 
-        //compile user input into new objecgt
+        //compile user input into new object
         const newReservation = {
           customerName: $("#reserve-name").val().trim(),
           customerEmail: $("#reserve-email").val().trim(),
@@ -114,7 +114,7 @@
             ? alert("Your reservation is confirmed!")
             : alert("You are on the waitlist.");
         });
-        //reset form
+        //clear form
         $("#reserve-name").val("");
         $("#reserve-email").val("");
         $("#reserve-unique-id").val("");
